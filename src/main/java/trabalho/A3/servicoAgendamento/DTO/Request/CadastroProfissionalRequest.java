@@ -7,9 +7,6 @@ import trabalho.A3.servicoAgendamento.domain.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 
 public class CadastroProfissionalRequest {
@@ -27,17 +24,17 @@ public class CadastroProfissionalRequest {
     private Endereco endereco;
 
     @NotNull
-    private CargaHoraria cargaHoraria;
+    private DisponibilidadeHoraria disponibilidadeHoraria;
 
     public CadastroProfissionalRequest(){}
 
-    public CadastroProfissionalRequest(String nome, String email, String cpfOuCnpj, String senha, Endereco endereco, CargaHoraria cargaHoraria) {
+    public CadastroProfissionalRequest(String nome, String email, String cpfOuCnpj, String senha, Endereco endereco, DisponibilidadeHoraria disponibilidadeHoraria) {
         this.nome = nome;
         this.email = email;
         this.cpfOuCnpj = cpfOuCnpj;
         this.senha = senha;
         this.endereco = endereco;
-        this.cargaHoraria = cargaHoraria;
+        this.disponibilidadeHoraria = disponibilidadeHoraria;
     }
 
     public String getNome() {
@@ -80,16 +77,20 @@ public class CadastroProfissionalRequest {
         this.endereco = endereco;
     }
 
-
-    public CargaHoraria getCargaHoraria() {
-        return cargaHoraria;
+    public DisponibilidadeHoraria getDisponibilidadeHoraria() {
+        return disponibilidadeHoraria;
     }
 
-    public void setCargaHoraria(CargaHoraria cargaHoraria) {
-        this.cargaHoraria = cargaHoraria;
+    public void setDisponibilidadeHoraria(DisponibilidadeHoraria disponibilidadeHoraria) {
+        this.disponibilidadeHoraria = disponibilidadeHoraria;
     }
 
     public Profissional toModel (CadastroProfissionalRequest cadastroProfissionalRequest){
-        return new Profissional(cadastroProfissionalRequest.getNome(), cadastroProfissionalRequest.getEmail(), cadastroProfissionalRequest.getCpfOuCnpj(), cadastroProfissionalRequest.getSenha(), cadastroProfissionalRequest.getEndereco(), cadastroProfissionalRequest.getCargaHoraria());
+        return new Profissional(cadastroProfissionalRequest.getNome(),
+                cadastroProfissionalRequest.getEmail(),
+                cadastroProfissionalRequest.getCpfOuCnpj(),
+                cadastroProfissionalRequest.getSenha(),
+                cadastroProfissionalRequest.getEndereco(),
+                cadastroProfissionalRequest.getDisponibilidadeHoraria());
     }
 }

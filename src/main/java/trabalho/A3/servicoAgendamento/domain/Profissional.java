@@ -2,7 +2,6 @@ package trabalho.A3.servicoAgendamento.domain;
 
 import javax.persistence.*;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Entity
 public class Profissional {
@@ -16,22 +15,22 @@ public class Profissional {
     private String senha;
 
 
-
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Endereco endereco;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    private CargaHoraria cargaHoraria;
+    private DisponibilidadeHoraria disponibilidadeHoraria;
+
 
     public Profissional(){}
 
-    public Profissional(String nome, String email, String cpfOuCnpj, String senha, Endereco endereco, CargaHoraria cargaHoraria) {
+    public Profissional(String nome, String email, String cpfOuCnpj, String senha, Endereco endereco, DisponibilidadeHoraria disponibilidadeHoraria) {
         this.nome = nome;
         this.email = email;
         this.cpfOuCnpj = cpfOuCnpj;
         this.senha = senha;
         this.endereco = endereco;
-        this.cargaHoraria = cargaHoraria;
+        this.disponibilidadeHoraria = disponibilidadeHoraria;
 
     }
 
@@ -84,14 +83,14 @@ public class Profissional {
     }
 
 
-
-    public CargaHoraria getCargaHoraria() {
-        return cargaHoraria;
+    public DisponibilidadeHoraria getDisponibilidadeHoraria() {
+        return disponibilidadeHoraria;
     }
 
-    public void setCargaHoraria(CargaHoraria cargaHoraria) {
-        this.cargaHoraria = cargaHoraria;
+    public void setDisponibilidadeHoraria(DisponibilidadeHoraria disponibilidadeHoraria) {
+        this.disponibilidadeHoraria = disponibilidadeHoraria;
     }
+
 
     @Override
     public boolean equals(Object o) {

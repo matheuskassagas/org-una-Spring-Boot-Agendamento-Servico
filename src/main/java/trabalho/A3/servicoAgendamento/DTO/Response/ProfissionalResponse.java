@@ -2,12 +2,6 @@ package trabalho.A3.servicoAgendamento.DTO.Response;
 
 import trabalho.A3.servicoAgendamento.domain.*;
 
-import javax.persistence.ManyToOne;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 public class ProfissionalResponse {
 
     private Integer id;
@@ -17,17 +11,19 @@ public class ProfissionalResponse {
 
     private Endereco endereco;
 
-    private CargaHoraria cargaHoraria;
+    private DisponibilidadeHoraria disponibilidadeHoraria;
+
+    private Servico servico;
 
     public ProfissionalResponse(){}
 
-    public ProfissionalResponse(Integer id, String nome, String email, String cpfOuCnpj, Endereco endereco, CargaHoraria cargaHoraria) {
+    public ProfissionalResponse(Integer id, String nome, String email, String cpfOuCnpj, Endereco endereco, DisponibilidadeHoraria disponibilidadeHoraria) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.cpfOuCnpj = cpfOuCnpj;
         this.endereco = endereco;
-        this.cargaHoraria = cargaHoraria;
+        this.disponibilidadeHoraria = disponibilidadeHoraria;
     }
 
     public Integer getId() {
@@ -71,15 +67,20 @@ public class ProfissionalResponse {
     }
 
 
-    public CargaHoraria getCargaHoraria() {
-        return cargaHoraria;
+    public DisponibilidadeHoraria getCargaHoraria() {
+        return disponibilidadeHoraria;
     }
 
-    public void setCargaHoraria(CargaHoraria cargaHoraria) {
-        this.cargaHoraria = cargaHoraria;
+    public void setCargaHoraria(DisponibilidadeHoraria disponibilidadeHoraria) {
+        this.disponibilidadeHoraria = disponibilidadeHoraria;
     }
 
     public ProfissionalResponse toResponse(Profissional profissional){
-        return new ProfissionalResponse(profissional.getId(), profissional.getNome(),profissional.getEmail(), profissional.getCpfOuCnpj(), profissional.getEndereco(), profissional.getCargaHoraria());
+        return new ProfissionalResponse(profissional.getId(),
+                profissional.getNome(),
+                profissional.getEmail(),
+                profissional.getCpfOuCnpj(),
+                profissional.getEndereco(),
+                profissional.getDisponibilidadeHoraria());
     }
 }

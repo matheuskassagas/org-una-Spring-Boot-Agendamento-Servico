@@ -14,8 +14,7 @@ public class Servico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String cargo;
-    private String empresa;
+    private String nome;
     @Enumerated(EnumType.STRING)
     private TipoLocal tipoLocal;
     @Enumerated(EnumType.STRING)
@@ -25,14 +24,8 @@ public class Servico {
     @ManyToOne
     private Endereco endereco;
 
-    @ManyToOne
-    private Cliente cliente;
-
     @OneToMany
     private List<Insumo> insumos = new ArrayList<>();
-
-    @ManyToOne
-    private Agendamento agendamento;
 
     @ManyToOne
     private Profissional profissional;
@@ -41,16 +34,13 @@ public class Servico {
     public Servico(){}
 
 
-    public Servico(String cargo, String empresa, TipoLocal tipoLocal, TipoTrabalho tipoTrabalho, Double valor, Endereco endereco, Cliente cliente, List<Insumo> insumos, Agendamento agendamento, Profissional profissional) {
-        this.cargo = cargo;
-        this.empresa = empresa;
+    public Servico(String nome, TipoLocal tipoLocal, TipoTrabalho tipoTrabalho, Double valor, Endereco endereco, List<Insumo> insumos, Profissional profissional) {
+        this.nome = nome;
         this.tipoLocal = tipoLocal;
         this.tipoTrabalho = tipoTrabalho;
         this.valor = valor;
         this.endereco = endereco;
-        this.cliente = cliente;
         this.insumos = insumos;
-        this.agendamento = agendamento;
         this.profissional = profissional;
     }
 
@@ -62,20 +52,12 @@ public class Servico {
         this.id = id;
     }
 
-    public String getCargo() {
-        return cargo;
+    public String getNome() {
+        return nome;
     }
 
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
-    }
-
-    public String getEmpresa() {
-        return empresa;
-    }
-
-    public void setEmpresa(String empresa) {
-        this.empresa = empresa;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public TipoLocal getTipoLocal() {
@@ -116,22 +98,6 @@ public class Servico {
 
     public void setInsumos(List<Insumo> insumos) {
         this.insumos = insumos;
-    }
-
-    public Agendamento getAgendamento() {
-        return agendamento;
-    }
-
-    public void setAgendamento(Agendamento agendamento) {
-        this.agendamento = agendamento;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
     }
 
     public Profissional getProfissional() {

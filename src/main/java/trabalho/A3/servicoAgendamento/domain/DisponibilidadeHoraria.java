@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity
-public class CargaHoraria {
+public class DisponibilidadeHoraria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,11 +18,11 @@ public class CargaHoraria {
     private Integer horasContratadas;
 
 
-    public CargaHoraria(){
+    public DisponibilidadeHoraria(){
 
     }
 
-    public CargaHoraria(Integer horasSemanais, Integer horaInicio, Integer horaTermino, Integer horasContratadas) {
+    public DisponibilidadeHoraria(Integer horasSemanais, Integer horaInicio, Integer horaTermino, Integer horasContratadas) {
         this.horasSemanais = horasSemanais;
         this.horaInicio = horaInicio;
         this.horaTermino = horaTermino;
@@ -75,7 +75,7 @@ public class CargaHoraria {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CargaHoraria that = (CargaHoraria) o;
+        DisponibilidadeHoraria that = (DisponibilidadeHoraria) o;
         return getId().equals(that.getId());
     }
 
