@@ -12,16 +12,16 @@ public class DisponibilidadeHoraria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer horasSemanais;
-    private Integer horaInicio;
-    private Integer horaTermino;
+    private String horasSemanais;
+    private String horaInicio;
+    private String horaTermino;
 
 
     public DisponibilidadeHoraria(){
 
     }
 
-    public DisponibilidadeHoraria(Integer horasSemanais, Integer horaInicio, Integer horaTermino) {
+    public DisponibilidadeHoraria(String horasSemanais, String horaInicio, String horaTermino) {
         this.horasSemanais = horasSemanais;
         this.horaInicio = horaInicio;
         this.horaTermino = horaTermino;
@@ -35,27 +35,27 @@ public class DisponibilidadeHoraria {
         this.id = id;
     }
 
-    public Integer getHorasSemanais() {
+    public String getHorasSemanais() {
         return horasSemanais;
     }
 
-    public void setHorasSemanais(Integer horasSemanais) {
+    public void setHorasSemanais(String horasSemanais) {
         this.horasSemanais = horasSemanais;
     }
 
-    public Integer getHoraInicio() {
+    public String getHoraInicio() {
         return horaInicio;
     }
 
-    public void setHoraInicio(Integer horaInicio) {
+    public void setHoraInicio(String horaInicio) {
         this.horaInicio = horaInicio;
     }
 
-    public Integer getHoraTermino() {
+    public String getHoraTermino() {
         return horaTermino;
     }
 
-    public void setHoraTermino(Integer horaTermino) {
+    public void setHoraTermino(String horaTermino) {
         this.horaTermino = horaTermino;
     }
 
