@@ -15,19 +15,16 @@ public class DisponibilidadeHoraria {
     private Integer horasSemanais;
     private Integer horaInicio;
     private Integer horaTermino;
-    private Integer horasContratadas;
 
 
     public DisponibilidadeHoraria(){
 
     }
 
-    public DisponibilidadeHoraria(Integer horasSemanais, Integer horaInicio, Integer horaTermino, Integer horasContratadas) {
+    public DisponibilidadeHoraria(Integer horasSemanais, Integer horaInicio, Integer horaTermino) {
         this.horasSemanais = horasSemanais;
         this.horaInicio = horaInicio;
         this.horaTermino = horaTermino;
-        this.horasContratadas = horasContratadas;
-
     }
 
     public Integer getId() {
@@ -60,14 +57,6 @@ public class DisponibilidadeHoraria {
 
     public void setHoraTermino(Integer horaTermino) {
         this.horaTermino = horaTermino;
-    }
-
-    public Integer getHorasContratadas() {
-        return horasContratadas;
-    }
-
-    public void setHorasContratadas(Integer horasContratadas) {
-        this.horasContratadas = horasContratadas;
     }
 
 
