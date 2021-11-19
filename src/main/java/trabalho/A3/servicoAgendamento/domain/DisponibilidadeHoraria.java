@@ -15,8 +15,7 @@ public class DisponibilidadeHoraria {
     private String horasSemanais;
     private String horaInicio;
     private String horaTermino;
-
-
+    
     public DisponibilidadeHoraria(){
 
     }

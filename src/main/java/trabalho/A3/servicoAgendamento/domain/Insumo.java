@@ -1,9 +1,8 @@
 package trabalho.A3.servicoAgendamento.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -15,11 +14,16 @@ public class Insumo {
     private String nome;
     private String descricao;
 
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Servico servico;
+
     public Insumo(){}
 
-    public Insumo(String nome, String descricao) {
+    public Insumo(String nome, String descricao, Servico servico) {
         this.nome = nome;
         this.descricao = descricao;
+        this.servico = servico;
     }
 
     public Integer getId() {
@@ -44,6 +48,14 @@ public class Insumo {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public Servico getServico() {
+        return servico;
+    }
+
+    public void setServico(Servico servico) {
+        this.servico = servico;
     }
 
     @Override

@@ -1,46 +1,39 @@
-package trabalho.A3.servicoAgendamento.domain;
+package trabalho.A3.servicoAgendamento.DTO.Response;
 
-import net.minidev.json.annotate.JsonIgnore;
+import trabalho.A3.servicoAgendamento.domain.Endereco;
+import trabalho.A3.servicoAgendamento.domain.Insumo;
+import trabalho.A3.servicoAgendamento.domain.Servico;
 import trabalho.A3.servicoAgendamento.domain.enums.TipoLocal;
 import trabalho.A3.servicoAgendamento.domain.enums.TipoTrabalho;
 
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-@Entity
-public class Servico {
+public class ServicoResponse {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nome;
-    @Enumerated(EnumType.STRING)
     private TipoLocal tipoLocal;
-    @Enumerated(EnumType.STRING)
     private TipoTrabalho tipoTrabalho;
     private Double valor;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
     private Endereco endereco;
 
-    @OneToMany(mappedBy = "servico")
     private List<Insumo> insumos = new ArrayList<>();
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    private Profissional profissional;
+    private ProfissionalResponse profissional;
 
+    public ServicoResponse() {
+    }
 
-    public Servico(){}
-
-
-    public Servico(String nome, TipoLocal tipoLocal, TipoTrabalho tipoTrabalho, Double valor, Endereco endereco, Profissional profissional) {
+    public ServicoResponse(Integer id, String nome, TipoLocal tipoLocal, TipoTrabalho tipoTrabalho, Double valor, Endereco endereco, List<Insumo> insumos, ProfissionalResponse profissional) {
+        this.id = id;
         this.nome = nome;
         this.tipoLocal = tipoLocal;
         this.tipoTrabalho = tipoTrabalho;
         this.valor = valor;
         this.endereco = endereco;
+        this.insumos = insumos;
         this.profissional = profissional;
     }
 
@@ -100,24 +93,24 @@ public class Servico {
         this.insumos = insumos;
     }
 
-    public Profissional getProfissional() {
+    public ProfissionalResponse getProfissional() {
         return profissional;
     }
 
-    public void setProfissional(Profissional profissional) {
+    public void setProfissional(ProfissionalResponse profissional) {
         this.profissional = profissional;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Servico servico = (Servico) o;
-        return getId().equals(servico.getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId());
+    public ServicoResponse toResponse(Servico servico) {
+        return new ServicoResponse(
+                servico.getId(),
+                servico.getNome(),
+                servico.getTipoLocal(),
+                servico.getTipoTrabalho(),
+                servico.getValor(),
+                servico.getEndereco(),
+                servico.getInsumos(),
+                new ProfissionalResponse().toResponse(servico.getProfissional())
+        );
     }
 }

@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import trabalho.A3.servicoAgendamento.DTO.Request.CadastroClienteRequest;
 import trabalho.A3.servicoAgendamento.DTO.Request.CadastroProfissionalRequest;
+import trabalho.A3.servicoAgendamento.DTO.Request.ServicoProfissionalRequest;
 import trabalho.A3.servicoAgendamento.domain.Cliente;
 import trabalho.A3.servicoAgendamento.domain.Profissional;
+import trabalho.A3.servicoAgendamento.domain.Servico;
 import trabalho.A3.servicoAgendamento.services.ClienteService;
 import trabalho.A3.servicoAgendamento.services.ProfissionalService;
 
@@ -39,10 +41,20 @@ public class ProfissionalController {
     }
 
     @GetMapping
-    public ResponseEntity<?> listarTodos (){
+    public ResponseEntity<?> carregaProfissionais (){
         return ResponseEntity.ok().body(profissionalService.carregaProfissionais());
     }
 
+    @PostMapping("/servico")
+    public ResponseEntity<?> cadastroServico(@RequestBody @Valid ServicoProfissionalRequest servicoProfissionalRequest){
+        Servico servico = profissionalService.cadastroServico(servicoProfissionalRequest);
+        URI uri = UriComponentsBuilder.fromPath("/servico/{id}").buildAndExpand(servico.getId()).toUri();
+        return ResponseEntity.created(uri).build();
+    }
 
+    @GetMapping("/servicos")
+    public ResponseEntity<?> carregaServicos(){
+        return ResponseEntity.ok().body(profissionalService.carregaServicos());
+    }
 
 }
