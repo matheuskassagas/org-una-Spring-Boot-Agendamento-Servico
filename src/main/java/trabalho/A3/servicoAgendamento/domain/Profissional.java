@@ -14,13 +14,11 @@ public class Profissional {
     private String cpfOuCnpj;
     private String senha;
 
-
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Endereco endereco;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     private DisponibilidadeHoraria disponibilidadeHoraria;
-
 
     public Profissional(){}
 

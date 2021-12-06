@@ -12,6 +12,11 @@ public class InsumoProfissionalRequest {
     public InsumoProfissionalRequest() {
     }
 
+    public InsumoProfissionalRequest(@NotBlank String nome, @NotBlank String descricao) {
+        this.nome = nome;
+        this.descricao = descricao;
+    }
+
     public String getNome() {
         return nome;
     }

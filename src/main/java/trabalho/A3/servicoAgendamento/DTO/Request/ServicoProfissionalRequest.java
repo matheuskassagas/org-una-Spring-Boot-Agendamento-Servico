@@ -26,9 +26,6 @@ public class ServicoProfissionalRequest {
     private Double valor;
 
     @NotNull
-    private Endereco endereco;
-
-    @NotNull
     private List<InsumoProfissionalRequest> insumos = new ArrayList<>();
 
     @NotNull
@@ -37,12 +34,11 @@ public class ServicoProfissionalRequest {
     public ServicoProfissionalRequest() {
     }
 
-    public ServicoProfissionalRequest(String nome, TipoLocal tipoLocal, TipoTrabalho tipoTrabalho, Double valor, Endereco endereco, List<InsumoProfissionalRequest> insumos, Integer idProfissional) {
+    public ServicoProfissionalRequest(String nome, TipoLocal tipoLocal, TipoTrabalho tipoTrabalho, Double valor, List<InsumoProfissionalRequest> insumos, Integer idProfissional) {
         this.nome = nome;
         this.tipoLocal = tipoLocal;
         this.tipoTrabalho = tipoTrabalho;
         this.valor = valor;
-        this.endereco = endereco;
         this.insumos = insumos;
         this.idProfissional = idProfissional;
     }
@@ -79,14 +75,6 @@ public class ServicoProfissionalRequest {
         this.valor = valor;
     }
 
-    public Endereco getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
-    }
-
     public List<InsumoProfissionalRequest> getInsumos() {
         return insumos;
     }
@@ -109,7 +97,7 @@ public class ServicoProfissionalRequest {
                 servicoProfissionalRequest.getTipoLocal(),
                 servicoProfissionalRequest.getTipoTrabalho(),
                 servicoProfissionalRequest.getValor(),
-                servicoProfissionalRequest.getEndereco(),
+                profissional.getEndereco(),
                 profissional
         );
     }

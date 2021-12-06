@@ -3,9 +3,12 @@ package trabalho.A3.servicoAgendamento.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import trabalho.A3.servicoAgendamento.DTO.Request.AgendamentoRequest;
 import trabalho.A3.servicoAgendamento.DTO.Request.CadastroClienteRequest;
 import trabalho.A3.servicoAgendamento.DTO.Response.ClienteResponse;
+import trabalho.A3.servicoAgendamento.domain.Agendamento;
 import trabalho.A3.servicoAgendamento.domain.Cliente;
+import trabalho.A3.servicoAgendamento.repositories.AgendamentoRepositoriesJPA;
 import trabalho.A3.servicoAgendamento.repositories.ClienteRepositoriesJPA;
 
 import java.util.List;
@@ -17,6 +20,9 @@ public class ClienteService {
 
     @Autowired
     private ClienteRepositoriesJPA clienteRepositoriesJPA;
+
+    @Autowired
+    private AgendamentoRepositoriesJPA agendamentoRepositoriesJPA;
 
     public Cliente cadastroCliente(CadastroClienteRequest cadastroClienteRequest){
       Cliente cliente = cadastroClienteRequest.toModel(cadastroClienteRequest);
@@ -34,5 +40,14 @@ public class ClienteService {
     public List<ClienteResponse> carregaClientes (){
         return clienteRepositoriesJPA.findAll().stream()
                 .map(cliente -> new ClienteResponse().toResponse(cliente)).collect(Collectors.toList());
+    }
+
+    public void cadastroAgendamento(AgendamentoRequest agendamentoRequest) throws Exception {
+        Optional<Cliente> clienteProcurado = clienteRepositoriesJPA.findById(agendamentoRequest.getClienteId());
+        if(clienteProcurado.isPresent()){
+            agendamentoRepositoriesJPA.save(new Agendamento(agendamentoRequest.getHoraAtendimento(), clienteProcurado.get()));
+        } else {
+            throw new Exception();
+        }
     }
 }

@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+import trabalho.A3.servicoAgendamento.DTO.Request.AgendamentoRequest;
 import trabalho.A3.servicoAgendamento.DTO.Request.CadastroClienteRequest;
 import trabalho.A3.servicoAgendamento.domain.Cliente;
 import trabalho.A3.servicoAgendamento.services.ClienteService;
@@ -40,6 +41,15 @@ public class ClienteController {
         return ResponseEntity.ok().body(clienteService.carregaClientes());
     }
 
+    @PostMapping("/agendamento")
+    public ResponseEntity<?> cadastroAgendamento(@RequestBody AgendamentoRequest agendamentoRequest) throws Exception {
+        try{
+            clienteService.cadastroAgendamento(agendamentoRequest);
+            return ResponseEntity.ok().build();
+        }catch (Exception e){
+            return new ResponseEntity<>("Usuário não encontrado", HttpStatus.NOT_FOUND);
+        }
 
+    }
 
 }
