@@ -8,12 +8,15 @@ public class AgendamentoRequest {
 
     private Integer clienteId;
 
+    private Integer servicoId;
+
     public AgendamentoRequest() {
     }
 
-    public AgendamentoRequest(Integer horaAtendimento, Integer clienteId) {
+    public AgendamentoRequest(Integer horaAtendimento, Integer clienteId, Integer servicoId) {
         this.horaAtendimento = horaAtendimento;
         this.clienteId = clienteId;
+        this.servicoId = servicoId;
     }
 
     public Integer getHoraAtendimento() {
@@ -30,5 +33,13 @@ public class AgendamentoRequest {
 
     public void setClienteId(Integer clienteId) {
         this.clienteId = clienteId;
+    }
+
+    public Integer getServicoId() {
+        return servicoId;
+    }
+
+    public void setServicoId(Integer servicoId) {
+        this.servicoId = servicoId;
     }
 }

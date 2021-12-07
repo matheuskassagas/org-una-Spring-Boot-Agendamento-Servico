@@ -14,11 +14,15 @@ public class Agendamento {
     @ManyToOne
     private Cliente cliente;
 
+    @ManyToOne
+    private Servico servico;
+
     public Agendamento(){}
 
-    public Agendamento(Integer horaAtendimento, Cliente cliente) {
+    public Agendamento(Integer horaAtendimento, Cliente cliente, Servico servico) {
         this.horaAtendimento = horaAtendimento;
         this.cliente = cliente;
+        this.servico = servico;
     }
 
     public Integer getId() {
@@ -43,6 +47,14 @@ public class Agendamento {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public Servico getServico() {
+        return servico;
+    }
+
+    public void setServico(Servico servico) {
+        this.servico = servico;
     }
 
     @Override

@@ -7,11 +7,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import trabalho.A3.servicoAgendamento.DTO.Request.AgendamentoRequest;
 import trabalho.A3.servicoAgendamento.DTO.Request.CadastroClienteRequest;
+import trabalho.A3.servicoAgendamento.domain.Agendamento;
 import trabalho.A3.servicoAgendamento.domain.Cliente;
 import trabalho.A3.servicoAgendamento.services.ClienteService;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/clientes")
@@ -21,35 +23,35 @@ public class ClienteController {
     private ClienteService clienteService;
 
     @PostMapping("/cadastro")
-    public ResponseEntity<?> casdastroCliente (@Valid @RequestBody CadastroClienteRequest cadastroClienteRequest){
-       Cliente cliente = clienteService.cadastroCliente(cadastroClienteRequest);
-       URI uri = UriComponentsBuilder.fromPath("/clientes/{id}").buildAndExpand(cliente.getId()).toUri();
-       return ResponseEntity.created(uri).build();
+    public ResponseEntity<?> casdastroCliente(@Valid @RequestBody CadastroClienteRequest cadastroClienteRequest) {
+        Cliente cliente = clienteService.cadastroCliente(cadastroClienteRequest);
+        URI uri = UriComponentsBuilder.fromPath("/clientes/{id}").buildAndExpand(cliente.getId()).toUri();
+        return ResponseEntity.created(uri).build();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> carregaCliente (@PathVariable Integer id){
-        try{
-            return new ResponseEntity<>(clienteService.carregaCliente(id),HttpStatus.FOUND);
+    public ResponseEntity<?> carregaCliente(@PathVariable Integer id) {
+        try {
+            return new ResponseEntity<>(clienteService.carregaCliente(id), HttpStatus.FOUND);
         } catch (Exception e) {
             return new ResponseEntity<>("Usuario não encontrado", HttpStatus.NOT_FOUND);
         }
     }
 
     @GetMapping
-    public ResponseEntity<?> listarTodos (){
+    public ResponseEntity<?> listarTodos() {
         return ResponseEntity.ok().body(clienteService.carregaClientes());
     }
 
     @PostMapping("/agendamento")
-    public ResponseEntity<?> cadastroAgendamento(@RequestBody AgendamentoRequest agendamentoRequest) throws Exception {
-        try{
-            clienteService.cadastroAgendamento(agendamentoRequest);
-            return ResponseEntity.ok().build();
-        }catch (Exception e){
-            return new ResponseEntity<>("Usuário não encontrado", HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<?> cadastroAgendamento(@RequestBody AgendamentoRequest agendamentoRequest) {
+        clienteService.cadastroAgendamento(agendamentoRequest);
+        return ResponseEntity.ok().build();
+    }
 
+    @GetMapping("/agendamentos/{id}")
+    public List<Agendamento> listaAgendamentos(@PathVariable Integer id){
+        return clienteService.listaAgendamentos(id);
     }
 
 }
